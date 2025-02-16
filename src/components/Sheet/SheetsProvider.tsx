@@ -1,19 +1,25 @@
 "use client";
 
-import React, { FC, PropsWithChildren } from "react";
+import React, { FC, PropsWithChildren, useContext } from "react";
 import { EffectCreative } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/effect-creative";
 import { Sheet } from "./Sheet";
+import { MenuLayoutContext } from "@/context/MenuLayoutContext";
 
 interface ISheetProvider extends PropsWithChildren {}
 
 export const SheetsProvider: FC<ISheetProvider> = (props) => {
   const { children } = props;
+  const { selectedFoodCode, onSelectFood } = useContext(MenuLayoutContext);
+  const isAnyFoodSelected = selectedFoodCode !== "";
+
+  function handleUnselectFood() {
+    onSelectFood("");
+  }
+
   return (
     <Swiper
-      grabCursor={true}
+      grabCursor={!isAnyFoodSelected}
       effect={"creative"}
       creativeEffect={{
         prev: {
@@ -26,6 +32,9 @@ export const SheetsProvider: FC<ISheetProvider> = (props) => {
       }}
       modules={[EffectCreative]}
       className="w-full h-dvh"
+      onSlideChange={() => {
+        handleUnselectFood();
+      }}
     >
       {React.Children.toArray(children).map((InnerChildren, childIndex) => (
         <SwiperSlide key={childIndex}>{InnerChildren}</SwiperSlide>

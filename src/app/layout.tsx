@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { Fira_Sans, Fira_Code } from "next/font/google";
 import "./globals.css";
+import "swiper/css";
+import "swiper/css/effect-creative";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import "swiper/css/free-mode";
+import "swiper/css/grid";
 import { NextIntlClientProvider } from "next-intl";
 import { MenuLayoutProvider } from "@/context/MenuLayoutContext";
 

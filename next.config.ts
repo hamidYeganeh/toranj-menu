@@ -5,6 +5,12 @@ const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
   /* config options here */
+  images: {
+    remotePatterns: [
+      { hostname: "**", pathname: "**", protocol: "https" },
+      { hostname: "**", pathname: "**", protocol: "http" },
+    ],
+  },
 };
 
 export default withNextIntl(nextConfig);

@@ -7,13 +7,18 @@ export const menu: IFood[] = [
     price: 18.5,
     images: [
       "https://mirito.ir/wp-content/uploads/2022/11/khoresh-fesenjan.jpg",
-      // "https://upload.wikimedia.org/wikipedia/commons/0/0e/Fesenjan.jpg",
+      "https://chishi.ir/wp-content/uploads/2019/10/fesenjan.jpg",
+      "https://ashpazbashii.com/wp-content/uploads/2022/11/Fasanjun-with-minced-meat.jpg",
+      "https://www.raspinaclub.com/wp-content/uploads/2022/05/%D8%AE%D9%88%D8%B1%D8%B4-%D9%81%D8%B3%D9%86%D8%AC%D8%A7%D9%86-%D8%A8%D8%A7-%D9%85%D8%B1%D8%BA2-1024x819.jpg",
+      "https://melkamlak.com/wp-content/uploads/2023/08/%D8%B7%D8%B1%D8%B2-%D8%AA%D9%87%DB%8C%D9%87-%D8%AE%D9%88%D8%B1%D8%B4-%D9%81%D8%B3%D9%86%D8%AC%D9%88%D9%86-%D8%A8%D8%A7-%D9%85%D8%B1%D8%BA%D8%9B-%D9%85%D8%AC%D9%84%D8%B3%DB%8C-%D9%88-%D8%AC%D8%A7%D8%A7%D9%81%D8%AA%D8%A7%D8%AF%D9%87-%D9%88-%D8%AE%D9%88%D8%B4%D9%85%D8%B2%D9%87.jpg",
+      "https://www.jowhareh.com/images/Jowhareh/galleries_2/poster_6a242221-be4e-42b2-be53-64e0e914b450.jpeg",
+      "https://www.delino.com/blog/wp-content/uploads/2021/12/fesenjan-goosht-ghelgheli.jpg",
     ],
     category: "stews",
     similar: ["Gheymeh", "Khoresht Gheymé"],
     description:
       "Fesenjan is a rich stew made with pomegranate paste and ground walnuts.",
-    material: "Chicken, walnuts, pomegranate paste",
+    material: "Chicken walnuts pomegranate paste",
   },
   {
     code: "kabab001",
