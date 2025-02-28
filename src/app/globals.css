@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 * {
-  font-family: "var(--font-fira-sans)";
+  font-family: "var(--font-lustria)";
 }
 
 :root {

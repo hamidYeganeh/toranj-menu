@@ -1,45 +1,39 @@
 "use client";
 
-import { Food } from "@/components/Food";
-import { Sheet, SheetsProvider } from "@/components/Sheet";
-import { menu } from "@/menu";
+import { CategoryItem } from "@/components/CategoryItem";
+import { Column } from "@/components/Column";
+import { MainLayout } from "@/components/MainLayout";
+import { MenuItem } from "@/components/MenuItem";
+import { getMenuCategories, getMenuList } from "@/helpers/getMenu";
 
 export default function Home() {
-  function getMenuItems() {
-    function chunkByLimit(chunkSize: number = 10) {
-      return menu.slice(0, chunkSize);
-    }
-    return chunkByLimit(9);
-  }
-  const menuList = getMenuItems();
+  const menuList = getMenuList();
+  const categoriesList = getMenuCategories();
   return (
-    <main className="w-full h-dvh bg-slate-800">
-      <SheetsProvider>
-        <Sheet>
-          <div className="w-full h-fit max-h-full grid grid-cols-2 gap-4 p-4 overflow-y-scroll">
-            <Food food={menu[0]} />
-            <Food food={menu[1]} />
-            <Food food={menu[2]} />
-            <Food food={menu[3]} />
-            <Food food={menu[4]} />
-            <Food food={menu[5]} />
-            <Food food={menu[6]} />
-            <Food food={menu[7]} />
-            <Food food={menu[8]} />
-            <Food food={menu[9]} />
-            <Food food={menu[10]} />
-            <Food food={menu[11]} />
-          </div>
-        </Sheet>
-        <Sheet>
-          <div className="w-full h-fit max-h-full grid grid-cols-2 gap-4 p-4 overflow-y-scroll">
-            <Food food={menu[12]} />
-            <Food food={menu[13]} />
-            <Food food={menu[14]} />
-            <Food food={menu[15]} />
-          </div>
-        </Sheet>
-      </SheetsProvider>
-    </main>
+    <MainLayout>
+      <div className="w-[calc(100%-48px)] mx-auto flex flex-col items-start min-h-[calc(100dvh-48*4px)]">
+        <div className="w-96 h-48 mx-auto my-12 bg-green-700"></div>
+
+        <div className="grid grid-cols-12 w-full h-full gap-4">
+          <Column title="Kategorien" colSpan="4">
+            <div className="w-full flex flex-col gap-[calc(18*4px)] py-4 px-8">
+              {categoriesList.map((categoryItem, categoryItemIndex) => (
+                <CategoryItem
+                  key={categoryItemIndex}
+                  categoryItem={categoryItem}
+                />
+              ))}
+            </div>
+          </Column>
+          <Column title="Kategorien" colSpan="8" withBorder>
+            <div className="w-full flex flex-col gap-[calc(18*4px)] py-4 px-8">
+              {menuList.map((menuItem, menuItemIndex) => (
+                <MenuItem key={menuItemIndex} menuItem={menuItem} />
+              ))}
+            </div>
+          </Column>
+        </div>
+      </div>
+    </MainLayout>
   );
 }

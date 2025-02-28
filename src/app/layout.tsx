@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fira_Sans, Fira_Code } from "next/font/google";
+import { Fira_Sans, Fira_Code, Lustria } from "next/font/google";
 import "./globals.css";
 import "swiper/css";
 import "swiper/css/effect-creative";
@@ -8,17 +8,12 @@ import "swiper/css/navigation";
 import "swiper/css/free-mode";
 import "swiper/css/grid";
 import { NextIntlClientProvider } from "next-intl";
-import { MenuLayoutProvider } from "@/context/MenuLayoutContext";
 
-const firaSans = Fira_Sans({
-  variable: "--font-fira-sans",
+const LustriaFont = Lustria({
+  variable: "--font-lustria",
+  weight: "400",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-});
-
-const firaMono = Fira_Code({
-  variable: "--font-fira-mono",
-  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -33,10 +28,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${firaSans.variable} ${firaMono.variable} antialiased`}>
-        <NextIntlClientProvider>
-          <MenuLayoutProvider>{children}</MenuLayoutProvider>
-        </NextIntlClientProvider>
+      <body
+        className={`${LustriaFont.variable} ${LustriaFont.style} antialiased`}
+      >
+        <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
     </html>
   );

@@ -9,8 +9,21 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
+        primary: {
+          main: "#0C6056",
+        },
+        secondary: {
+          light: "#BBA36026",
+          main: "#BBA360",
+        },
+        text: {
+          disabled: "#787878",
+        },
+        background: "#FFFFFF",
         foreground: "var(--foreground)",
+      },
+      fontFamily: {
+        lustria: "var(--font-lustria)",
       },
     },
   },

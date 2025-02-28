@@ -1,3 +1,8 @@
 {
-  "hello": "Hola"
+  "MenuPage": {
+    "footer": {
+      "title": "Holen Sie sich das Menü und die Rabatte",
+      "subtitle": "Geben Sie Ihre E-Mail-Adresse ein, um das Menü und die neuesten Rabatte zu erhalten"
+    }
+  }
 }
