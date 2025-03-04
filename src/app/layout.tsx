@@ -7,6 +7,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/free-mode";
 import "swiper/css/grid";
+import "keen-slider/keen-slider.min.css";
 import { NextIntlClientProvider } from "next-intl";
 
 const LustriaFont = Lustria({
