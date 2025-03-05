@@ -12,6 +12,7 @@ export const MainLayout: FC<PropsWithChildren> = (props) => {
 
   function handleSubmit() {
     setIsInputFocused(false);
+    console.log(email);
 
     setTimeout(() => {
       setEmail("");

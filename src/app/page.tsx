@@ -24,16 +24,13 @@ export default function Home() {
 
   const menuList = useMemo(() => {
     return getMenuList(category);
-  }, [category, menu]);
+  }, [category]);
   const categoriesList = getMenuCategories();
   const isCategorySelected = (selectedCategory: typeof category) =>
     selectedCategory === category;
 
   function handleSelectCategory(newCategory: typeof category) {
     setCategory(newCategory);
-  }
-  function handleShowFirstScreen() {
-    setIsFirstScreen(true);
   }
   function handleCloseFirstScreen() {
     setIsFirstScreen(false);
