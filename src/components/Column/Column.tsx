@@ -1,8 +1,6 @@
 import { cn } from "@/utils/cn";
 import Image from "next/image";
 import { FC, PropsWithChildren } from "react";
-import { FreeMode } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
 
 interface IColumnProps extends PropsWithChildren {
   title: string;
@@ -20,8 +18,22 @@ export const Column: FC<IColumnProps> = (props) => {
       })}
     >
       <div className="w-full flex flex-col gap-4 py-8 relative mx-auto">
-        <div className="w-full flex flex-row items-center justify-center">
+        <div className="w-full flex flex-row items-center justify-evenly">
+          <Image
+            src={"/images/title-side.svg"}
+            alt="Title Side"
+            width={32}
+            height={32}
+            className="size-8"
+          />
           <h3 className="text-4xl font-normal text-black">{title}</h3>
+          <Image
+            src={"/images/title-side.svg"}
+            alt="Title Side"
+            width={32}
+            height={32}
+            className="size-8 rotate-180"
+          />
         </div>
         <div className="w-full h-fit absolute bottom-0">
           <Image

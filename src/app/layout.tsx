@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fira_Sans, Fira_Code, Lustria } from "next/font/google";
+import { Lustria } from "next/font/google";
 import "./globals.css";
 import "swiper/css";
 import "swiper/css/effect-creative";
@@ -7,8 +7,8 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/free-mode";
 import "swiper/css/grid";
-import "keen-slider/keen-slider.min.css";
 import { NextIntlClientProvider } from "next-intl";
+import { AnimatePresence } from "framer-motion";
 
 const LustriaFont = Lustria({
   variable: "--font-lustria",
@@ -32,7 +32,9 @@ export default function RootLayout({
       <body
         className={`${LustriaFont.variable} ${LustriaFont.style} antialiased`}
       >
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider>
+          <AnimatePresence>{children}</AnimatePresence>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

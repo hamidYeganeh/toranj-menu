@@ -2,20 +2,16 @@ import { MenuItemContext } from "@/context/MenuItemContext";
 import { menu } from "@/menu";
 import { cn } from "@/utils/cn";
 import { motion } from "framer-motion";
-import { useKeenSlider } from "keen-slider/react";
 import { useFormatter } from "next-intl";
 import Image from "next/image";
 import { useContext } from "react";
+import { Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 export const MenuItemModal = () => {
   const { selectedItem, onSelectItem } = useContext(MenuItemContext);
 
   const formatter = useFormatter();
-  const [selectedItemImage] = useKeenSlider<HTMLDivElement>({
-    slides: { perView: 1, spacing: 12 },
-    mode: "snap",
-    loop: true,
-  });
 
   const findSelectedItem = menu.find(
     (menuItem) => menuItem.code === selectedItem
@@ -78,13 +74,25 @@ export const MenuItemModal = () => {
               height={36}
               className="w-full h-auto"
             />
+
+            <h2 className="text-7xl font-normal text-black text-left w-full">
+              {findSelectedItem?.name}
+            </h2>
+
             {isAnyItemSelected ? (
-              <div
-                ref={selectedItemImage}
-                className="w-full aspect-square keen-slider"
+              <Swiper
+                pagination={{
+                  clickable: true,
+                }}
+                grabCursor
+                mousewheel
+                modules={[Pagination]}
+                className="w-full aspect-square"
+                slidesPerView={1}
+                spaceBetween={12}
               >
                 {findSelectedItem?.images?.map((image, imageIndex) => (
-                  <div key={imageIndex} className="keen-slider__slide">
+                  <SwiperSlide key={imageIndex} className="keen-slider__slide">
                     <Image
                       src={image!}
                       alt={image!}
@@ -92,9 +100,9 @@ export const MenuItemModal = () => {
                       height={500}
                       className="w-full aspect-square object-cover"
                     />
-                  </div>
+                  </SwiperSlide>
                 ))}
-              </div>
+              </Swiper>
             ) : (
               <div className="w-full aspect-square bg-gray-400 animate-pulse"></div>
             )}

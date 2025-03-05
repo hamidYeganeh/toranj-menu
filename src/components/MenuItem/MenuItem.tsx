@@ -17,7 +17,8 @@ export const MenuItem: FC<IMenuItemProps> = (props) => {
 
   return (
     <>
-      <div
+      <motion.div
+        layout
         className="flex flex-col w-full gap-4"
         onClick={() => onSelectItem(menuItem.code)}
       >
@@ -61,7 +62,7 @@ export const MenuItem: FC<IMenuItemProps> = (props) => {
             {menuItem.description}
           </p>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };
