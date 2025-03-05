@@ -13,9 +13,11 @@ import { IFood } from "@/types";
 import { menu } from "@/menu";
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
+import { motion } from "framer-motion";
+import { cn } from "@/utils/cn";
 
 export default function Home() {
-  const [isFirstScreen, setIsFirstScreen] = useState(false);
+  const [isFirstScreen, setIsFirstScreen] = useState(true);
   const menuListSwiper = useRef<SwiperRef>(null);
   const categoriesListSwiper = useRef<SwiperRef>(null);
   const [category, setCategory] = useState<IFood["category"] | null>(null);
@@ -39,6 +41,38 @@ export default function Home() {
 
   return (
     <>
+      <motion.div
+        onClick={handleCloseFirstScreen}
+        className="w-full h-dvh fixed inset-0 m-auto z-[99999999]"
+        variants={{ visible: { y: 0 }, hidden: { y: "-100dvh" } }}
+        animate={isFirstScreen ? "visible" : "hidden"}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="w-full h-full relative">
+          <video
+            className="w-full h-full object-cover z-10"
+            autoPlay
+            muted
+            loop
+          >
+            <source
+              src="https://spexup.arvanvod.ir/OqrPLZb1pY/mvGbQEbQWE/origin_FlB9qmDlsQwlybLOQorL93Nv6w9oyU8Og3yi6nj9.mp4"
+              type="video/MP4"
+            />
+          </video>
+          <div className="absolute inset-0 m-auto bg-black/60 z-40"></div>
+
+          <div className="absolute inset-0 m-auto z-50 flex items-center justify-center">
+            <h1
+              className={cn(
+                "text-8xl font-normal mix-blend-difference text-white"
+              )}
+            >
+              {"Toranj Restaurant"}
+            </h1>
+          </div>
+        </div>
+      </motion.div>
       <MenuItemContextProvider>
         <MenuItemModal />
         <MainLayout>
@@ -127,8 +161,6 @@ export default function Home() {
                 colSpan="8"
                 title="Esswaren"
                 onNext={() => {
-                  console.log("NEXT");
-
                   if (menuListSwiper.current)
                     menuListSwiper.current?.swiper.slideNext();
                 }}
@@ -141,22 +173,28 @@ export default function Home() {
                   <Swiper
                     ref={menuListSwiper}
                     direction={"vertical"}
-                    pagination={{
-                      clickable: true,
-                    }}
                     grabCursor
-                    modules={[Pagination]}
                     className="w-full h-[calc(12*(40*4px))]"
                     slidesPerView={12}
                   >
                     {menuList.map((menuItem, menuItemIndex) => (
                       <SwiperSlide key={menuItem.code} className="h-fit">
-                        <div
+                        <motion.div
                           key={menuItemIndex}
+                          layout
+                          animate={"visible"}
+                          initial={"hidden"}
+                          variants={{
+                            visible: { y: 0 },
+                            hidden: {
+                              y: -150,
+                            },
+                          }}
+                          transition={{ delay: menuItemIndex * 0.02 }}
                           className="w-full min-h-40 h-fit"
                         >
                           <MenuItem menuItem={menuItem} />
-                        </div>
+                        </motion.div>
                       </SwiperSlide>
                     ))}
                   </Swiper>

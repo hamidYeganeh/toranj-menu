@@ -12,7 +12,7 @@ export const CategoryItem: FC<ICategoryItemProps> = (props) => {
 
   return (
     <div className="w-full flex flex-col gap-8 items-center">
-      <div className="w-32 aspect-video bg-slate-100"></div>
+      <div className="w-32 aspect-video bg-slate-100 animate-pulse"></div>
       <div className="w-full flex flex-row items-center justify-evenly">
         <motion.div
           animate={isActive ? "visible" : "hidden"}
