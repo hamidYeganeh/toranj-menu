@@ -20,7 +20,7 @@ export const MainLayout: FC<PropsWithChildren> = (props) => {
   }
 
   return (
-    <div className="bg-primary-main p-6 w-full h-dvh flex">
+    <div className="bg-primary-main p-6 w-auto min-h-dvh flex aspect-[1650/2800]">
       <div className="bg-background w-full relative p-6 flex flex-col gap-8">
         <div className="h-full w-full flex flex-col gap-6">
           <div

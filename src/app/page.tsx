@@ -10,14 +10,11 @@ import { MenuItemContextProvider } from "@/context/MenuItemContext";
 import { MenuItemModal } from "@/components/MenuItemModal";
 import { useMemo, useRef, useState } from "react";
 import { IFood } from "@/types";
-import { menu } from "@/menu";
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
 import { motion } from "framer-motion";
-import { cn } from "@/utils/cn";
 
 export default function Home() {
-  const [isFirstScreen, setIsFirstScreen] = useState(true);
+  // const [isFirstScreen, setIsFirstScreen] = useState(true);
   const menuListSwiper = useRef<SwiperRef>(null);
   const categoriesListSwiper = useRef<SwiperRef>(null);
   const [category, setCategory] = useState<IFood["category"] | null>(null);
@@ -32,13 +29,13 @@ export default function Home() {
   function handleSelectCategory(newCategory: typeof category) {
     setCategory(newCategory);
   }
-  function handleCloseFirstScreen() {
-    setIsFirstScreen(false);
-  }
+  // function handleCloseFirstScreen() {
+  //   setIsFirstScreen(false);
+  // }
 
   return (
     <>
-      <motion.div
+      {/* <motion.div
         onClick={handleCloseFirstScreen}
         className="w-full h-dvh fixed inset-0 m-auto z-[99999999]"
         variants={{ visible: { y: 0 }, hidden: { y: "-100dvh" } }}
@@ -69,7 +66,7 @@ export default function Home() {
             </h1>
           </div>
         </div>
-      </motion.div>
+      </motion.div> */}
       <MenuItemContextProvider>
         <MenuItemModal />
         <MainLayout>
@@ -115,12 +112,8 @@ export default function Home() {
                   <Swiper
                     ref={categoriesListSwiper}
                     direction={"vertical"}
-                    pagination={{
-                      clickable: true,
-                    }}
                     grabCursor
                     mousewheel
-                    modules={[Pagination]}
                     className="w-full h-[calc(12*(40*4px))]"
                     slidesPerView={12}
                   >
@@ -129,7 +122,7 @@ export default function Home() {
                         <div className="w-full min-h-40 h-fit">
                           <div
                             key={categoryItemIndex}
-                            className="w-full h-40 keen-slider__slide"
+                            className="w-full h-40"
                             onClick={() => {
                               if (isCategorySelected(categoryItem)) {
                                 handleSelectCategory(null);

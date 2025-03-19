@@ -1,4 +1,5 @@
 import { MenuItemContext } from "@/context/MenuItemContext";
+import { getMenuItemImage } from "@/helpers/getMenu";
 import { menu } from "@/menu";
 import { cn } from "@/utils/cn";
 import { motion } from "framer-motion";
@@ -17,6 +18,33 @@ export const MenuItemModal = () => {
     (menuItem) => menuItem.code === selectedItem
   );
   const isAnyItemSelected = !!selectedItem;
+
+  function handleMenuItemPrice() {
+    const isPriceNumeric = typeof findSelectedItem?.price === "number";
+    const isPriceString = typeof findSelectedItem?.price === "string";
+    const isPriceWithSizes = !isPriceNumeric && !isPriceString;
+
+    function formatPrice(price: number) {
+      return formatter.number(price, {
+        currency: "EUR",
+        currencySign: "standard",
+        style: "currency",
+      });
+    }
+
+    if (isPriceNumeric) {
+      return formatPrice(findSelectedItem?.price as number);
+    } else if (isPriceString) {
+      return findSelectedItem?.price;
+    } else if (isPriceWithSizes) {
+      return (
+        findSelectedItem?.price
+          // @ts-ignore
+          ?.map(({ price, size }) => `${size} : ${formatPrice(price)}`)
+          .join("\n\n")
+      );
+    }
+  }
 
   return (
     <>
@@ -80,29 +108,39 @@ export const MenuItemModal = () => {
             </h2>
 
             {isAnyItemSelected ? (
-              <Swiper
-                pagination={{
-                  clickable: true,
-                }}
-                grabCursor
-                mousewheel
-                modules={[Pagination]}
-                className="w-full aspect-square"
-                slidesPerView={1}
-                spaceBetween={12}
-              >
-                {findSelectedItem?.images?.map((image, imageIndex) => (
-                  <SwiperSlide key={imageIndex} className="keen-slider__slide">
-                    <Image
-                      src={image!}
-                      alt={image!}
-                      width={500}
-                      height={500}
-                      className="w-full aspect-square object-cover"
-                    />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
+              findSelectedItem?.images?.length! === 0 ? (
+                <Image
+                  src={getMenuItemImage(null)}
+                  alt={"Toranj"}
+                  width={500}
+                  height={500}
+                  className="w-full aspect-square object-cover"
+                />
+              ) : (
+                <Swiper
+                  pagination={{
+                    clickable: true,
+                  }}
+                  grabCursor
+                  mousewheel
+                  modules={[Pagination]}
+                  className="w-full aspect-square"
+                  slidesPerView={1}
+                  spaceBetween={12}
+                >
+                  {findSelectedItem?.images?.map((image, imageIndex) => (
+                    <SwiperSlide key={imageIndex}>
+                      <Image
+                        src={getMenuItemImage(image!)}
+                        alt={image!}
+                        width={500}
+                        height={500}
+                        className="w-full aspect-square object-cover"
+                      />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              )
             ) : (
               <div className="w-full aspect-square bg-gray-400 animate-pulse"></div>
             )}
@@ -125,11 +163,8 @@ export const MenuItemModal = () => {
             </div>
           )}
           {isAnyItemSelected ? (
-            <p className="text-6xl font-normal text-black">
-              {formatter.number(findSelectedItem?.price!, {
-                style: "currency",
-                currency: "EUR",
-              })}
+            <p className="text-6xl font-normal text-black whitespace-pre-line">
+              {handleMenuItemPrice()}
             </p>
           ) : (
             <div className="w-64 h-14 bg-gray-400 animate-pulse rounded"></div>

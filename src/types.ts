@@ -1,7 +1,7 @@
 export interface IFood {
   code: string;
   name: string;
-  price: number;
+  price: { size: string; price: number | string }[] | number | string;
   category: string;
   description: string;
   material: string;

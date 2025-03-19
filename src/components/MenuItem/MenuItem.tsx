@@ -13,7 +13,28 @@ export const MenuItem: FC<IMenuItemProps> = (props) => {
   const formatter = useFormatter();
   const { onSelectItem, selectedItem } = useContext(MenuItemContext);
 
-  const isSelectedMenuItem = menuItem.code === selectedItem;
+  function handleMenuItemPrice() {
+    const isPriceNumeric = typeof menuItem.price === "number";
+    const isPriceString = typeof menuItem.price === "string";
+    const isPriceWithSizes = !isPriceNumeric && !isPriceString;
+
+    function formatPrice(price: number) {
+      return formatter.number(price, {
+        currency: "EUR",
+        currencySign: "standard",
+        style: "currency",
+      });
+    }
+
+    if (isPriceNumeric) {
+      return formatPrice(menuItem.price as number);
+    } else if (isPriceString) {
+      return menuItem.price;
+    } else if (isPriceWithSizes) {
+      // @ts-ignore
+      return menuItem.price?.map(({ price }) => formatPrice(price)).join(", ");
+    }
+  }
 
   return (
     <>
@@ -33,11 +54,7 @@ export const MenuItem: FC<IMenuItemProps> = (props) => {
           <div className="flex-1 h-px bg-secondary-main" />
 
           <p className="text-2xl font-normal line-clamp-2">
-            {formatter.number(menuItem.price, {
-              currency: "EUR",
-              currencySign: "standard",
-              style: "currency",
-            })}
+            {handleMenuItemPrice()}
           </p>
 
           <div className="size-12 rounded-full bg-secondary-light flex items-center justify-center">
